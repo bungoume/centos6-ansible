@@ -25,6 +25,7 @@ RUN \
   cd git-2.17.1 && \
   make prefix=/usr/local all && make prefix=/usr/local install && \
   cd && \
+  yum remove -y curl-devel expat-devel gettext-devel perl-ExtUtils-MakeMaker && \
   yum clean all && rm -rf /tmp/* /var/tmp/* /var/cache/yum/* /root/.cache/pip/*
 
 WORKDIR /data
