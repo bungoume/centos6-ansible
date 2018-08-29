@@ -1,10 +1,11 @@
 # Ansible Dockerfile for CentOS6
 FROM centos:6
 
-# for Ansible
+
 RUN \
+  # for Ansible
   yum clean all && \
-  yum -y install gcc libffi-devel openssl-devel python-devel openssh-clients tar unzip sudo rsyslog openssh-server upstart && \
+  yum -y install gcc libffi-devel openssl-devel python-devel openssh-clients tar unzip sudo rsyslog openssh-server upstart wget && \
   # for CircleCI2.0
   yum -y install ssh tar gzip ca-certificates && \
   mv /sbin/initctl /sbin/initctl.bak && ln -s /bin/true /sbin/initctl && \
@@ -12,23 +13,20 @@ RUN \
   curl -O https://bootstrap.pypa.io/2.6/get-pip.py && python get-pip.py && \
   pip install PyYAML==3.11 ansible==1.9.6 && \
   curl https://packagecloud.io/install/repositories/omnibus-serverspec/serverspec/script.rpm.sh | sh && \
-  yum -y install serverspec
-
-# install chrony
-RUN yum -y install wget && \
-    wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm && \
-    rpm -ivh epel-release-6-8.noarch.rpm && \
-    yum -y install chrony
-
-# install git2 for CircleCI2.0
-RUN \
-  cd /tmp && \
+  yum -y install serverspec && \
+  # install chrony
+  wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm && \
+  rpm -ivh epel-release-6-8.noarch.rpm && \
+  yum -y install chrony && \
+  # install git2 for CircleCI2.0
   yum -y install gcc curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-ExtUtils-MakeMaker && \
+  cd /tmp && \
   wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.17.1.tar.gz && \
   tar -zxf git-2.17.1.tar.gz && \
   cd git-2.17.1 && \
   make prefix=/usr/local all && make prefix=/usr/local install && \
-  cd /tmp && rm -rf /tmp/git-2.17.1
+  cd /tmp && rm -rf /tmp/* && \
+  yum clean all && rm -rf /var/cache/yum/*
 
 WORKDIR /data
 ENTRYPOINT ["/bin/bash"]
