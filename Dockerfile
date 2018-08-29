@@ -22,7 +22,7 @@ RUN yum -y install wget && \
 
 # install git2 for CircleCI2.0
 RUN \
-  cd /tmp
+  cd /tmp && \
   yum -y install gcc curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-ExtUtils-MakeMaker && \
   wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.17.1.tar.gz && \
   tar -zxf git-2.17.1.tar.gz && \
