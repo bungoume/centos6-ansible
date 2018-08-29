@@ -5,6 +5,8 @@ FROM centos:6
 RUN \
   yum clean all && \
   yum -y install gcc libffi-devel openssl-devel python-devel openssh-clients tar unzip sudo rsyslog openssh-server upstart && \
+  # for CircleCI2.0
+  yum -y install git ssh tar gzip ca-certificates && \
   mv /sbin/initctl /sbin/initctl.bak && ln -s /bin/true /sbin/initctl && \
   sed -i -e 's/requiretty/!requiretty/' /etc/sudoers && \
   curl -O https://bootstrap.pypa.io/2.6/get-pip.py && python get-pip.py && \
