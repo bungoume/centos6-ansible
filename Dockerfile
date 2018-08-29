@@ -27,7 +27,8 @@ RUN \
   wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.17.1.tar.gz && \
   tar -zxf git-2.17.1.tar.gz && \
   cd git-2.17.1 && \
-  make prefix=/usr/local all && make prefix=/usr/local install
+  make prefix=/usr/local all && make prefix=/usr/local install && \
+  cd /tmp && rm -rf /tmp/git-2.17.1
 
 WORKDIR /data
 ENTRYPOINT ["/bin/bash"]
