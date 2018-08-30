@@ -4,7 +4,7 @@ FROM centos:6
 RUN \
   # for Ansible
   yum clean all && \
-  yum -y install gcc libffi-devel openssl-devel python-devel openssh-clients tar unzip sudo rsyslog openssh-server upstart && \
+  yum -y install gcc libffi-devel openssl-devel python-devel openssh-clients tar unzip sudo rsyslog openssh-server upstart wget && \
   # for CircleCI2.0
   yum -y install ssh tar gzip ca-certificates && \
   mv /sbin/initctl /sbin/initctl.bak && ln -s /bin/true /sbin/initctl && \
@@ -25,7 +25,6 @@ RUN \
   cd git-2.17.1 && \
   make prefix=/usr/local all && make prefix=/usr/local install && \
   cd && \
-  yum remove -y curl-devel expat-devel gettext-devel perl-ExtUtils-MakeMaker && \
   yum clean all && rm -rf /tmp/* /var/tmp/* /var/cache/yum/* /root/.cache/pip/*
 
 WORKDIR /data
