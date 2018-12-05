@@ -10,7 +10,7 @@ RUN \
   mv /sbin/initctl /sbin/initctl.bak && ln -s /bin/true /sbin/initctl && \
   sed -i -e 's/requiretty/!requiretty/' /etc/sudoers && \
   curl -O https://bootstrap.pypa.io/2.6/get-pip.py && python get-pip.py && \
-  pip install PyYAML==3.11 pycparser==2.18 ansible==1.9.6 && \
+  pip install PyYAML==3.11 pycparser==2.18 PyNaCl==1.2.1 ansible==1.9.6 && \
   #curl https://packagecloud.io/install/repositories/omnibus-serverspec/serverspec/script.rpm.sh | sh && \
   #yum -y install serverspec && \
   # install chrony
