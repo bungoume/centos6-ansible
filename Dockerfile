@@ -11,8 +11,8 @@ RUN \
   sed -i -e 's/requiretty/!requiretty/' /etc/sudoers && \
   curl -O https://bootstrap.pypa.io/2.6/get-pip.py && python get-pip.py && \
   pip install PyYAML==3.11 ansible==1.9.6 && \
-  curl https://packagecloud.io/install/repositories/omnibus-serverspec/serverspec/script.rpm.sh | sh && \
-  yum -y install serverspec && \
+  #curl https://packagecloud.io/install/repositories/omnibus-serverspec/serverspec/script.rpm.sh | sh && \
+  #yum -y install serverspec && \
   # install chrony
   curl -O http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm && \
   rpm -ivh epel-release-6-8.noarch.rpm && \
